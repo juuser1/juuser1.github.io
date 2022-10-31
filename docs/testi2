@@ -1,1 +1,313 @@
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .style_otsikko {
+
+                color:#643155;
+            }
+
+            .style_text {
+
+                color: #ec1b9c;
+            }
+
+            .laakeleipa, .laakekaava {
+                display: inline;
+            }
+
+            .ranskalainen {
+
+                color: aqua;
+            }
+
+        
+         </style>   
+        <meta charset="utf-8"/>
+        <title>Anestesia</title>
+    </head>
+    <body>
+        
+
+
+        <script>
+            //luodaan funktio jolla kutsutaan otsikot
+            function createHeader(otsikko) {
+
+                document.write("<h1 class='style_otsikko'>" + otsikko + "</h1>");
+            }
+            //luodaan funktio jolla kutsutaan leipäteksti
+            function createText(leipaTeksti) {
+
+                document.write("<p class='style_text'>" + leipaTeksti + "</p>");
+
+
+            }
+            //luodaan funktio väliotsikoille
+            function createHeader2(otsikko2) {
+                document.write("<h2 class='style_otsikko2'>" + otsikko2 + "</h2>");
+
+            }
+
+            //Luodaan funktio päivittyvälle lääkekaavalle. Tämä yhdistetään samalle riville lääkeleipätekstin kanssa käyttäen inline-toimintoa
+            function laakeKaava(dynid) {
+                document.write("<div class='laakekaava' id='"+dynid+"'></div></li>");
+
+            }
+
+            //Luodaan funktio lääkekaavojen leipätekstille
+            
+            function laakeLeipa(leipalaake) {
+                document.write("<li><div class='laakeleipa'>" + leipalaake + "</div>");
+
+            }
+
+            //Funktio millä listataan asioita
+
+            function listaus(lista) {
+                document.write("<li class='ranskalainen'>" + lista + "</li>")
+
+            }
+
+            //luodaan funktio jolla saadaan passiiviset tietolaatikot, joissa label, jonka avulla laatikot voi muotoilla
+            function tietoAnto(teksti, input_id) {
+
+                document.write("<label class='textbox_label'>" + teksti + "</label>");
+
+                window['field_' + input_id] = document.createElement("input");
+                window['field_' + input_id].setAttribute("id", input_id);
+                window['field_' + input_id].setAttribute("type", "text");
+                window['field_' + input_id].setAttribute("class", "textbox");
+                document.body.appendChild(window['field_' + input_id]);
+
+
+            }
+
+            //Luodaan oma tekstilaatikko mihin voidaan kirjoittaa tarvittava nestehoito
+            function nestetieto(teksti, input_id) {
+
+                document.write("<label class='nestealue'>" + teksti + "</label>");
+
+                window['field_' + input_id] = document.createElement("textarea");
+                window['field_' + input_id].setAttribute("id", input_id);
+                window['field_' + input_id].setAttribute("class", "nestealue");
+                window['field_' + input_id].setAttribute("name", "nestehomma");
+                document.body.appendChild(window['field_' + input_id]);
+
+
+            }
+
+
+
+            //luodaan päivämäärä
+        //let pVM = new Date().toLocaleDateString()
+
+            
+
+            //tietoAnto("kikkeli ", "kokkeli");
+            createHeader("PÄIVYSTYSLAPARATOMIA, KOIRA");
+
+            tietoAnto("Eläinlääkäri: ", "Ell"), tietoAnto("Hoitaja", "hoitaja"), tietoAnto("Pvm", "pvm");
+            tietoAnto("Nimi/Rotu", "NjaR"), tietoAnto("ASA", "asa");
+            document.write("<br>")
+            
+
+            
+        
+           
+            
+          
+           
+
+                        //aktiivisesti kuunneltu tietolaatikko painoa varten dynaamisesti päivittyvillä funktioilla
+                        var elPaino; 
+  
+                        const tekstiBoxi = document.createElement("input");
+                        tekstiBoxi.setAttribute("id", "painoKentta");
+                        tekstiBoxi.setAttribute("type", "number");
+
+                        document.body.appendChild(tekstiBoxi);
+
+                        const painoNimi = document.createElement("label");
+                        painoNimi.setAttribute("for", "painoKentta");
+                        painoNimi.innerHTML = "Koiran paino: ";
+
+                        const painoBoksi = document.getElementById("painoKentta");
+                        painoBoksi.setAttribute("placeholder", "syötä koiran paino");
+
+                        document.body.insertBefore(painoNimi, painoBoksi);
+                        //aktiivinen kuuntelija eläimen painon kentään
+                        tekstiBoxi.addEventListener('input', updatePaino);
+    
+                      
+                         // luodaan lääkitysmuuttujat funktiossa käytettäviin kaavoihin
+
+                        let levometadoni1;
+                        let levometadoni2;
+                        let flkLataus1;
+                        let flkLataus2;
+                        let alfaksaloniVasteeseenIV1;
+                        let alfaksaloniVasteeseenIV2;
+                        let midatsolaami1;
+                        let flkInfuusio1;
+                        let flkInfuusio2;
+                        let rineaAlbaRopivakaiiniBupivakaiini1;
+                        let rineaAlbaRopivakaiiniBupivakaiini2;
+                        let ovaritLidokaiini1;
+                        let ringer1;
+                        let ringer2;
+                        let ringerBolus1;
+                        let volvenBolus1;
+                        let dobutamiiniCRI1;
+                        let dobutamiiniCRI2;
+                        let noradneraliiniCRI1;
+                        let noradneraliiniCRI2;
+                        let atropiini1;
+                        let fentanyyliBolus1;
+                        let meloksikaami1;
+                        let karprofeeni1;
+                        let metamitsoli1;
+                        let levometadoni3;
+                        let maropitantti1;
+                        let buprenorfiini1;
+                        let atropiini2;
+                        let adrenaliini1;
+                        let naloksoni1;
+                        let flumatseniili1;
+
+
+                        //luodaan funktio joka ottaa lomakkeelle syötetyn painon ja laskee sen mukaan eri lääkkeiden annostuksen
+                            function updatePaino() {
+        
+                                elPaino = this.value;
+                                levometadoni1 = Number(elPaino * 0.1 / 2.5).toFixed(2);
+                                levometadoni2 = Number(elPaino * 0.2 / 2.5).toFixed(2);
+                                flkLataus1 = Number(elPaino * 0.5).toFixed(2);
+                                flkLataus2 = Number(elPaino * 1).toFixed(2);
+                                alfaksaloniVasteeseenIV1 = Number(elPaino * 1 / 10).toFixed(2);
+                                alfaksaloniVasteeseenIV2 = Number(elPaino * 2 / 10).toFixed(2);
+                                midatsolaami1 = Number(0.2 * elPaino / 5).toFixed(2);
+                                flkInfuusio1 = Number(0.5 * elPaino).toFixed(2);
+                                flkInfuusio2 = Number(2 * elPaino).toFixed(2);
+                                rineaAlbaRopivakaiiniBupivakaiini1 = Number(1 * elPaino / 5).toFixed(2);
+                                rineaAlbaRopivakaiiniBupivakaiini2 = Number(2 * elPaino / 5).toFixed(2);
+                                ovaritLidokaiini1 = Number(4 * elPaino / 20).toFixed(2);
+                                ringer1 = Number(5* elPaino).toFixed(2);
+                                ringer2 = Number(10 * elPaino).toFixed(2);
+                                ringerBolus1 = Number(15 * elPaino).toFixed(2);
+                                volvenBolus1 = Number(5 * elPaino).toFixed(2);
+                                dobutamiiniCRI1 = Number(0.3 * elPaino).toFixed(2);
+                                dobutamiiniCRI2 = Number(1.2 * elPaino).toFixed(2);
+                                atropiini1 = Number(0.02 * elPaino / 1).toFixed(2);
+                                fentanyyliBolus1 = Number(2 * elPaino / 50).toFixed(2);
+                                meloksikaami1 = Number(0.2 * elPaino / 5).toFixed(2);
+                                karprofeeni1 = Number(4 * elPaino / 50).toFixed(2);
+                                metamitsoli1 = Number(25 * elPaino / 500).toFixed(2);
+                                levometadoni3 = Number(0.1 * elPaino / 2.5).toFixed(2);
+                                maropitantti1 = Number(1 * elPaino / 10).toFixed(2);
+                                buprenorfiini1 = Number(0.02 * elPaino / 0.3).toFixed(2);
+                                atropiini2 = Number(0.04 * elPaino / 1).toFixed(2);
+                                adrenaliini1 = Number(0.01 * elPaino / 1).toFixed(2);
+                                naloksoni1 = Number(0.04 * elPaino / 0.4).toFixed(2);
+                                flumatseniili1 = Number(0.01 * elPaino / 0.1).toFixed(2);
+
+
+                            
+                                document.getElementById("levometadoni").innerHTML = levometadoni1 + " ml - " + levometadoni2 + " ml ";
+                                document.getElementById("flklataus").innerHTML = flkLataus1 + " ml - " + flkLataus2 + " ml ";
+                                document.getElementById("alfaksaloni").innerHTML = alfaksaloniVasteeseenIV1 + " mg - " + alfaksaloniVasteeseenIV2 + " mg ";
+                                document.getElementById("midatsolaami").innerHTML = midatsolaami1 + " ml ";
+                                document.getElementById("flkInfuusio").innerHTML = flkInfuusio1 + " ml/h - " + flkInfuusio2 + " ml/h ";
+                                document.getElementById("lineaAlbaRopivakaiini/Bupivakaiini").innerHTML = rineaAlbaRopivakaiiniBupivakaiini1 + "ml - " + rineaAlbaRopivakaiiniBupivakaiini2 + " ml ";
+                                document.getElementById("Ovarit lidokaiini").innerHTML = ovaritLidokaiini1 + "ml ";
+                                document.getElementById("ringer").innerHTML = ringer1 + " ml - " + ringer2 + "ml ";
+                                document.getElementById("Ringer-bolus").innerHTML = ringerBolus1 + " ml ";
+                                document.getElementById("voluven-Bolus").innerHTML = volvenBolus1 + " ml ";
+                                document.getElementById("dobutamiini").innerHTML = dobutamiiniCRI1 + " ml/h - " + dobutamiiniCRI2 + " ml/h ";
+                                document.getElementById("atropiinieka").innerHTML = atropiini1 + " ml ";
+                                document.getElementById("fentanyyli-bolus").innerHTML = fentanyyliBolus1 + " ml ";
+                                document.getElementById("kolmeEriLääkettä").innerHTML = meloksikaami1 + " ml TAI karprofeeni 4 mg/kg " + karprofeeni1 + " ml IV TAI Metamitsoli 25 mg/kg IV " + metamitsoli1 + " ml";
+                                document.getElementById("Levometadoni3").innerHTML = levometadoni3 + " ml ";
+                                document.getElementById("Maropitamtti1").innerHTML = maropitantti1 + " ml ";
+                                document.getElementById("Buprenorfiini1").innerHTML = buprenorfiini1 + " ml ";
+                                document.getElementById("Atropiini2").innerHTML = atropiini2 + " ml ";
+                                document.getElementById("Adrenaliini1").innerHTML = adrenaliini1 + " ml ";
+                                document.getElementById("Naloksani1").innerHTML = naloksoni1 + " ml ";
+                                document.getElementById("Flumatseniili1").innerHTML = "(" + flumatseniili1 + " ml)";
+
+            
+                                console.log(elPaino);
+                            
+                            }
+                           
+                            //Ensimmmäinen kappale
+                            createText("Stabiloi potilas mahdollisimman hyvin ennen induktiota. Potilas valmistellaan leikkaukseen hereillä: kanylointi ja karvojen ajo tehdään valmistelussa. Indusoi ja pese. Esihapetus tiiviillä maskilla 5 minuutin ajan. Aloita monitorointi (ekg, vp) tässä vaiheessa. Anna preoperatiivinen antibiootti tarvittaessa.")
+                            tietoAnto("Antibiootti jos annettu:", "antibiootti")
+                            //Esilääke
+                            createHeader2("ESILÄÄKE:");
+                            laakeLeipa("Levometadoni 0.1-0.2 mg/kg IV: ");
+                            laakeKaava("levometadoni"), tietoAnto("Eränro:", "eräNro1"), tietoAnto("Klo:", "klo1");
+                            document.write("<br>");
+                            laakeLeipa("FLK-lataus 0.5-1 ml/kg 5-10 minuutin aikana IV:");
+                            laakeKaava("flklataus"), tietoAnto("Eränro:", "eräNro2"), tietoAnto("Klo:", "klo2");
+                            //Induktio
+                            createHeader2("INDUKTIO:");
+                            laakeLeipa("Alfaksaloni vasteeseen 1 - 2mg/kg IV: ");
+                            laakeKaava("alfaksaloni"), tietoAnto("Klo:", "klo3");
+                            laakeLeipa("+/- Midatsolaami 0.2 mg/kg IV: ");
+                            laakeKaava("midatsolaami"), tietoAnto("Klo:", "klo4")
+                            createText("Anestesian ylläpito sevofluraani 1 - 2.5 %, hapen virtaus 1 l/min kiertävällä järjestelmällä, kytke tarvittaessa ventilaattoriin");
+                            laakeLeipa("FLK-infuusio 0.5-2 ml/kg/h ");
+                            laakeKaava("flkInfuusio");
+                            createHeader2("PUUDUTUKSET:");
+                            laakeLeipa("Linea alba ropivakaiini/bupivakaiini 1-2mg/kg SC: ");
+                            laakeKaava("lineaAlbaRopivakaiini/Bupivakaiini"), tietoAnto("Klo:", "klo5");
+                            laakeLeipa("Ovarit lidokaiini 4 mg/kg splash ");
+                            laakeKaava("Ovarit lidokaiini"), tietoAnto("Klo:", "klo6");
+                            createHeader2("NESTEET:");
+                            laakeLeipa("Ringer 5-10ml/kg/h ");
+                            laakeKaava("ringer"), nestetieto("Muut Nesteet: ", "nesteet");
+                            createHeader2("Hypotension hoito (SAP < 90 mmHg/MAP < 60 mmHg):");
+                            listaus("Kevennä ensin anestesiaa, jos mahdollista ja hoida mahdollinen bradykardia");
+                            laakeLeipa("Ringer-bolus 15 ml/kg 5 minuutin aikana ");
+                            laakeKaava("Ringer-bolus")
+                            laakeLeipa("Voluven-bolus 5 ml/kg 15 minuutin aikana ");
+                            laakeKaava("voluven-Bolus");
+                            laakeLeipa("Dobutamiini-CRI 0.3-1.2 ml/kg/h (5 ml Dobuject 50 mg/ml + 500 ml NaCl) ");
+                            laakeKaava("dobutamiini");
+                            createText("NA ensisijaisvalinta septisille potilaille ");
+                            createHeader2("Bradykardian hoito (syke < 60):");
+                            laakeLeipa("Atropiini 0.02 mg/kg IV ");
+                            laakeKaava("atropiinieka");
+                            createText("Kipu tmp aikana: Nosta FLK. Jos ei auta:");
+                            laakeLeipa("Fentanyyli-bolus 2mikrog/kg IV ml ");
+                            laakeKaava("fentanyyli-bolus"), tietoAnto("Eränro:", "eräNro3");
+                            createHeader2("Postop- kipulääkitys:");
+                            laakeLeipa("Meloksikaami 0.2mg/kg ");
+                            laakeKaava("kolmeEriLääkettä");
+                            laakeLeipa("Levometadoni 0.1mg/kg IV ");
+                            laakeKaava("Levometadoni3"), tietoAnto("Eränro:", "eräNro4"), tietoAnto("Klo:", "klo6");
+                            laakeLeipa("Maropitantti 1 mg/kg IV ");
+                            laakeKaava("Maropitamtti1"), tietoAnto("Klo:", "klo7");
+                            laakeLeipa("Buprenorfiini 0.02 mg/kg IV ennen kotiutusta ");
+                            laakeKaava("Buprenorfiini1"), tietoAnto("Eränro:", "eräNro5"), tietoAnto("Klo:", "klo6");
+                            createHeader2("Elvytys")
+                            laakeLeipa("Atropiini 0.04mg/kg IV ");
+                            laakeKaava("Atropiini2");
+                            laakeLeipa("Adrenaliini 0.01mg/kg IV ");
+                            laakeKaava("Adrenaliini1");
+                            laakeLeipa("Naloksoni 0.04 mg/kg IV ");
+                            laakeKaava("Naloksani1");
+                            laakeLeipa("(Flumatseniili 0.01 mg/kg IV) ")
+                            laakeKaava("Flumatseniili1");
+
+
+
+                    
+                    
+            
+                        
+        </script>
+    </body>
+</html>
