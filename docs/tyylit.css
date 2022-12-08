@@ -1,5 +1,16 @@
-* {
-    box-sizing: border-box;
+
+.header { grid-area: header; }
+.navbar { grid-area: menu; }
+.article { grid-area: main; }
+.oikea { grid-area: right; }
+.footer { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
   }
   
   body {
@@ -7,46 +18,53 @@
   }
   
   /* Style the header */
-  #otsake {
-    background-color: #666;
+  .header {
+    background-color: rgb(138, 200, 230);
     padding: 30px;
     text-align: center;
     font-size: 35px;
     color: white;
   }
   
+.section {
+
+background-color: bisque;
+
+}
+
   /* Create two columns/boxes that floats next to each other */
-  #navigaatio {
+  .navbar {
     float: left;
-    width: 30%;
+    
    
     background: rgb(22, 168, 156);
     padding: 20px;
   }
   
   /* Style the list inside the menu */
-  nav ul {
+  .navbar ul {
     list-style-type: none;
     padding: 0;
   }
   
-  #artikkeli {
+  .article {
     float: left;
     padding: 20px;
-    width: 70%;
+    
     background-color: #93d49c;
    
   }
   
   /* Clear floats after the columns */
-  section::after {
+  .oikea {
+    background-color: #ecf1d6;
     content: "";
     display: table;
     clear: both;
   }
   
   /* Style the footer */
-  footer {
+  .footer {
     background-color: rgb(119, 119, 119);
     padding: 10px;
     text-align: center;
