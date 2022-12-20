@@ -1,0 +1,66 @@
+body {
+
+    background-color: rgb(218, 231, 219);
+    color: white;
+}
+h1 {
+    display: inline-block;
+    font-size: 20px;
+    color: black;
+    border: 1px solid sandybrown;
+}
+p {
+
+    font-size: 12px;
+    color: green;
+}
+.testi {
+
+    border: 2px dotted;
+    width: 350px;
+    height: 150px;
+    color: black;
+
+}
+ol {
+
+    list-style-type: lower-latin;
+}
+
+ul {
+
+    list-style-type: square;
+}
+
+nav {
+
+    text-align: left;
+
+    }
+
+img {
+
+    width: 200px;
+    
+}
+
+figure {
+
+    margin: 0;
+}
+
+figcaption {
+
+    color: black;
+}
+
+label {
+
+    color: black;
+}
+
+label, progress {
+
+    margin-top: 20px;
+
+}
